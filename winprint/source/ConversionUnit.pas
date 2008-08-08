@@ -93,7 +93,7 @@ const
                                {3this segment.                      3}
                                {A컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴훃}
 
-   Function TXlat(Var Source: String; Var Table: String):String;
+(*   Function TXlat(Var Source: String; Var Table: String):String; *)
 
    procedure ReadANDConvert(CodePage: TCodePage;
                             FileName: string; 
@@ -120,7 +120,7 @@ const
 
 
 
-
+(*
    {旼컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴?}
    {3This Function translates or filters a String as per the Byte values3}
    {3in the Table buffer. It implements the Assembler XLAT instruction. 3}
@@ -144,7 +144,7 @@ const
               loop @filter      {loop back}
         @end: pop ds            {restore data segment}
    end;
-
+*)
 
 { TConversionItem }
 

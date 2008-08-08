@@ -61,7 +61,7 @@ interface
       property PopupMenu : TPopupMenu read fPopupMenu write fPopupMenu;
     end;
 
-  procedure Register;
+//  procedure Register;
 
   type
      PHWND = ^HWND;
@@ -263,12 +263,12 @@ implementation
        else // Handle all messages with the default handler
           Result := DefWindowProc(FWindowHandle, Msg, wParam, lParam);
   end;
-
+{
   procedure Register;
   begin
     RegisterComponents('MyComponents', [TTrayIcon2]);
   end;
-
+}
 end.
 
 

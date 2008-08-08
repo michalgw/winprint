@@ -31,6 +31,8 @@ object ConfigForm: TConfigForm
     Hint = 'Stosuje zmiany dokonane w konfiguracji programu.'
     Anchors = [akRight, akBottom]
     Caption = 'Zastosuj'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
     OnClick = Button3Click
   end
@@ -42,6 +44,8 @@ object ConfigForm: TConfigForm
     Hint = 'Anuluje zmiany dokonane w konfiguracji programu.'
     Anchors = [akRight, akBottom]
     Caption = 'Anuluj'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     OnClick = Button2Click
   end
@@ -61,7 +65,7 @@ object ConfigForm: TConfigForm
     Top = 0
     Width = 314
     Height = 326
-    ActivePage = TabSheet2
+    ActivePage = TabSheet3
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
     object TabSheet2: TTabSheet
@@ -158,42 +162,6 @@ object ConfigForm: TConfigForm
           Alignment = taRightJustify
           Caption = 'Dolny'
         end
-        object FloatEdit1: TFloatEdit
-          Left = 44
-          Top = 24
-          Width = 50
-          Height = 21
-          TabOrder = 0
-          Text = '0'
-          OnChange = ConfigChanged
-        end
-        object FloatEdit2: TFloatEdit
-          Left = 136
-          Top = 24
-          Width = 50
-          Height = 21
-          TabOrder = 1
-          Text = '0'
-          OnChange = ConfigChanged
-        end
-        object FloatEdit3: TFloatEdit
-          Left = 44
-          Top = 56
-          Width = 50
-          Height = 21
-          TabOrder = 2
-          Text = '0'
-          OnChange = ConfigChanged
-        end
-        object FloatEdit4: TFloatEdit
-          Left = 136
-          Top = 56
-          Width = 50
-          Height = 21
-          TabOrder = 3
-          Text = '0'
-          OnChange = ConfigChanged
-        end
       end
       object RadioGroup1: TRadioGroup
         Left = 204
@@ -241,26 +209,6 @@ object ConfigForm: TConfigForm
           Height = 13
           Alignment = taRightJustify
           Caption = 'na stron'#281
-        end
-        object FloatEdit5: TFloatEdit
-          Left = 92
-          Top = 22
-          Width = 50
-          Height = 21
-          TabOrder = 0
-          Text = '0'
-          OnChange = FloatEdit5Change
-          OnExit = ResolveEditValues1
-        end
-        object IntEdit1: TIntEdit
-          Left = 212
-          Top = 22
-          Width = 50
-          Height = 21
-          TabOrder = 1
-          Text = '0'
-          OnChange = IntEdit1Change
-          OnExit = ResolveEditValues1
         end
       end
     end
@@ -327,8 +275,6 @@ object ConfigForm: TConfigForm
           Height = 21
           Hint = #346'cie'#380'ka do katalogu z plikami, kt'#243're b'#281'd'#261' przetwarzane.'
           Anchors = [akLeft, akTop, akRight]
-          ParentShowHint = False
-          ShowHint = False
           TabOrder = 0
           OnChange = ConfigChanged
         end
@@ -338,6 +284,8 @@ object ConfigForm: TConfigForm
           Width = 88
           Height = 21
           Hint = 'Maska plik'#243'w, kt'#243're b'#281'd'#261' przetwarzane (np. *.txt).'
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 1
           OnChange = ConfigChanged
         end
@@ -362,12 +310,15 @@ object ConfigForm: TConfigForm
         end
       end
       object GroupBox2: TGroupBox
-        Left = 0
-        Top = 116
+        Left = 5
+        Top = 117
         Width = 290
         Height = 134
         Caption = ' Aplikacja '
         TabOrder = 1
+        DesignSize = (
+          290
+          134)
         object Label3: TLabel
           Left = 12
           Top = 20
@@ -398,35 +349,59 @@ object ConfigForm: TConfigForm
           Height = 13
           Caption = 'Label13'
         end
-        object SpinEdit1: TSpinEdit
+        object Edit6: TEdit
           Left = 220
           Top = 16
-          Width = 55
-          Height = 22
+          Width = 40
+          Height = 21
           Hint = 'Okre'#347'la czas, co jaki nale'#380'y przetwarza'#263' kolejny plik.'
-          EditorEnabled = False
-          Increment = 100
-          MaxValue = 5000
-          MinValue = 100
+          Anchors = [akLeft, akTop, akRight]
+          ParentShowHint = False
+          ReadOnly = True
+          ShowHint = True
           TabOrder = 0
-          Value = 500
-          OnChange = ConfigChanged
+          Text = '100'
         end
-        object SpinEdit2: TSpinEdit
+        object Edit7: TEdit
           Left = 220
           Top = 44
-          Width = 55
-          Height = 22
+          Width = 40
+          Height = 21
           Hint = 
             'Okre'#347'la po jakim czasie od ostatniego zapisu do pliku mo'#380'na go p' +
             'rzetwarza'#263'.'
-          EditorEnabled = False
-          Increment = 100
-          MaxValue = 5000
-          MinValue = 100
+          Anchors = [akLeft, akTop, akRight]
+          ParentShowHint = False
+          ReadOnly = True
+          ShowHint = True
           TabOrder = 1
-          Value = 500
-          OnChange = ConfigChanged
+          Text = '100'
+        end
+        object UpDown1: TUpDown
+          Left = 260
+          Top = 16
+          Width = 17
+          Height = 21
+          Associate = Edit6
+          Min = 100
+          Max = 5000
+          Increment = 100
+          Position = 100
+          TabOrder = 4
+          Thousands = False
+        end
+        object UpDown2: TUpDown
+          Left = 260
+          Top = 44
+          Width = 17
+          Height = 21
+          Associate = Edit7
+          Min = 100
+          Max = 5000
+          Increment = 100
+          Position = 100
+          TabOrder = 5
+          Thousands = False
         end
         object CheckBox1: TCheckBox
           Left = 12
@@ -435,7 +410,9 @@ object ConfigForm: TConfigForm
           Height = 17
           Hint = 'Uruchamianie harmonogramu przy starcie Windows.'
           Caption = 'Uruchom przy starcie systemu'
-          TabOrder = 2
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
           OnClick = ConfigChanged
         end
         object TrackBar1: TTrackBar
@@ -446,7 +423,7 @@ object ConfigForm: TConfigForm
           Max = 3
           PageSize = 1
           Position = 1
-          TabOrder = 3
+          TabOrder = 2
           ThumbLength = 14
           TickMarks = tmBoth
           OnChange = TrackBar1Change
@@ -611,35 +588,16 @@ object ConfigForm: TConfigForm
           TabOrder = 1
           OnMouseMove = ListBox1MouseMove
         end
-        object IntEdit2: TIntEdit
-          Left = 12
-          Top = 90
-          Width = 48
-          Height = 21
-          TabOrder = 2
-          Text = '0'
-        end
-        object IntEdit3: TIntEdit
-          Left = 70
-          Top = 90
-          Width = 48
-          Height = 21
-          Hint = 'pozostaw 0 by usun'#261#263' znak'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          Text = '0'
-        end
         object Edit5: TEdit
           Left = 12
           Top = 132
           Width = 106
           Height = 21
-          TabOrder = 4
+          TabOrder = 3
         end
         object CheckBox4: TCheckBox
-          Left = 12
-          Top = 50
+          Left = 13
+          Top = 51
           Width = 133
           Height = 17
           Caption = 'dodatkowo przekoduj'
@@ -652,7 +610,7 @@ object ConfigForm: TConfigForm
           Width = 64
           Height = 25
           Caption = 'Zapisz'
-          TabOrder = 6
+          TabOrder = 2
           OnClick = Button8Click
         end
         object Button9: TButton
@@ -661,7 +619,7 @@ object ConfigForm: TConfigForm
           Width = 64
           Height = 25
           Caption = 'Wczytaj'
-          TabOrder = 7
+          TabOrder = 4
           OnClick = Button9Click
         end
       end

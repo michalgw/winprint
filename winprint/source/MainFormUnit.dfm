@@ -16,15 +16,6 @@ object MainForm: TMainForm
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  object TrayIcon1: TTrayIcon2
-    Active = True
-    ShowDesigning = False
-    ShowApp = False
-    OnDblClick = TrayIcon1DblClick
-    PopupMenu = PopupMenu1
-    Left = 32
-    Top = 16
-  end
   object PopupMenu1: TPopupMenu
     Left = 112
     Top = 16
@@ -80,9 +71,5 @@ object MainForm: TMainForm
     Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofEnableSizing]
     Left = 112
     Top = 112
-  end
-  object CEVersionInfo1: TCEVersionInfo
-    Left = 32
-    Top = 64
   end
 end

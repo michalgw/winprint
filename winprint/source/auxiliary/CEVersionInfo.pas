@@ -62,14 +62,16 @@ const
   'OriginalFilename', 'ProductName', 'ProductVersion', 'Comments');
 
 
-procedure Register;
+//procedure Register;
 
 implementation
 
+{
 procedure Register;
 begin
   RegisterComponents('MyComponents', [TCEVersionInfo]);
 end;
+}
 
 constructor TCEVersionInfo.Create(AOwner : TComponent);
 begin

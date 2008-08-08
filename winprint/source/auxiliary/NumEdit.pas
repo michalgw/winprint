@@ -139,15 +139,15 @@ type
     property OnStartDrag;
   end;
 
-procedure Register;
+//procedure Register;
 
 implementation
-
+{
 procedure Register;
 begin
   RegisterComponents('MyComponents', [TIntEdit, TFloatEdit]);
 end;
-
+}
 
 {****************** TIntEdit Mehtods *********************}
 constructor TIntEdit.create(Aowner:TComponent);

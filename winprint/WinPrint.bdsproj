@@ -145,12 +145,12 @@
 			<Language Name="RootDir">C:\Program Files\Borland\Delphi7\Bin\</Language>
 		</Language>
 		<VersionInfo>
-			<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+			<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 			<VersionInfo Name="AutoIncBuild">False</VersionInfo>
 			<VersionInfo Name="MajorVer">1</VersionInfo>
 			<VersionInfo Name="MinorVer">5</VersionInfo>
 			<VersionInfo Name="Release">0</VersionInfo>
-			<VersionInfo Name="Build">6</VersionInfo>
+			<VersionInfo Name="Build">8</VersionInfo>
 			<VersionInfo Name="Debug">False</VersionInfo>
 			<VersionInfo Name="PreRelease">False</VersionInfo>
 			<VersionInfo Name="Special">False</VersionInfo>
@@ -162,15 +162,16 @@
 		<VersionInfoKeys>
 			<VersionInfoKeys Name="CompanyName">GNU GPL Software</VersionInfoKeys>
 			<VersionInfoKeys Name="FileDescription">WinPrint</VersionInfoKeys>
-			<VersionInfoKeys Name="FileVersion">1.5.0.6</VersionInfoKeys>
+			<VersionInfoKeys Name="FileVersion">1.5.0.8</VersionInfoKeys>
 			<VersionInfoKeys Name="InternalName">WinPrint</VersionInfoKeys>
-			<VersionInfoKeys Name="LegalCopyright">Przemysław Czerkas &amp; Mieczyslaw Nalewaj</VersionInfoKeys>
+			<VersionInfoKeys Name="LegalCopyright">Przemysław Czerkas &amp; Mieczysław Nalewaj</VersionInfoKeys>
 			<VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
 			<VersionInfoKeys Name="OriginalFilename">WinPrint.exe</VersionInfoKeys>
 			<VersionInfoKeys Name="ProductName">WinPrint</VersionInfoKeys>
 			<VersionInfoKeys Name="ProductVersion">1.5</VersionInfoKeys>
 			<VersionInfoKeys Name="Comments"></VersionInfoKeys>
-		</VersionInfoKeys>  <Excluded_Packages>
+		</VersionInfoKeys>  
+    <Excluded_Packages>
       <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclib100.bpl">Borland InterBase Express Components</Excluded_Packages>
       <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclIntraweb_80_100.bpl">Intraweb 8.0 Design Package for Borland Development Studio 2006</Excluded_Packages>
       <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>

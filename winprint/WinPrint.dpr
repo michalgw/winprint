@@ -32,7 +32,6 @@
 program WinPrint;
 
 {$R 'resources\icons32x32\icons.res' 'resources\icons32x32\icons.rc'}
-{$R 'resources\WinPrint.res' 'resources\WinPrint.rc'}
 
 uses
   Forms,
@@ -51,11 +50,13 @@ uses
   PrintStringsUnit in 'source\PrintStringsUnit.pas',
   ConversionUnit in 'source\ConversionUnit.pas';
 
+{$R *.res}
+
 begin
   Application.Initialize;
   SetWindowLong(Application.Handle, GWL_EXSTYLE, WS_EX_TOOLWINDOW); //prevents flickering
   Application.ShowMainForm:=false;
-  Application.Title:='';
+  Application.Title := 'WinPrint';
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TConfigForm, ConfigForm);
   Application.Run;

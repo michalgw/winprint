@@ -31,6 +31,6 @@ rem {   MA  02111-1307  USA                                                     
 rem {                                                                              }
 rem {******************************************************************************}
 
-brcc32.exe icons16x16\icons.rc
+rem brcc32.exe icons16x16\icons.rc
 brcc32.exe icons32x32\icons.rc
-brcc32.exe WinPrint.rc
+rem brcc32.exe WinPrint.rc

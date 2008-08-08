@@ -35,7 +35,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ComCtrls, StdCtrls, Buttons, Spin, ExtCtrls, NumEdit, Printers, ConversionUnit;
+  ComCtrls, StdCtrls, Buttons, ExtCtrls, NumEdit, Printers, ConversionUnit;
 
 type
   TConfigData = record
@@ -79,8 +79,6 @@ type
     GroupBox2: TGroupBox;
     Label3: TLabel;
     Label4: TLabel;
-    SpinEdit1: TSpinEdit;
-    SpinEdit2: TSpinEdit;
     CheckBox1: TCheckBox;
     GroupBox3: TGroupBox;
     Label5: TLabel;
@@ -92,10 +90,10 @@ type
     Label8: TLabel;
     Label9: TLabel;
     RadioGroup1: TRadioGroup;
-    FloatEdit1: TFloatEdit;
-    FloatEdit2: TFloatEdit;
-    FloatEdit3: TFloatEdit;
-    FloatEdit4: TFloatEdit;
+//    FloatEdit1: TFloatEdit;
+//    FloatEdit2: TFloatEdit;
+//    FloatEdit3: TFloatEdit;
+//    FloatEdit4: TFloatEdit;
     Edit3: TEdit;
     Label11: TLabel;
     Button5: TButton;
@@ -105,8 +103,8 @@ type
     Label13: TLabel;
     GroupBox5: TGroupBox;
     Label10: TLabel;
-    FloatEdit5: TFloatEdit;
-    IntEdit1: TIntEdit;
+//    FloatEdit5: TFloatEdit;
+//    IntEdit1: TIntEdit;
     Label14: TLabel;
     CheckBox2: TCheckBox;
     TabSheet3: TTabSheet;
@@ -121,8 +119,8 @@ type
     ListBox1: TListBox;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    IntEdit2: TIntEdit;
-    IntEdit3: TIntEdit;
+//    IntEdit2: TIntEdit;
+//    IntEdit3: TIntEdit;
     Edit5: TEdit;
     CheckBox4: TCheckBox;
     Label17: TLabel;
@@ -130,6 +128,10 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox5: TCheckBox;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    UpDown1: TUpDown;
+    UpDown2: TUpDown;
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -157,6 +159,14 @@ type
     ListBox1HintIndex: integer;
     IgnoreOnChange: boolean;
     TempConversionItems: TConversionItems;
+    IntEdit1: TIntEdit;
+    IntEdit2: TIntEdit;
+    IntEdit3: TIntEdit;
+    FloatEdit1: TFloatEdit;
+    FloatEdit2: TFloatEdit;
+    FloatEdit3: TFloatEdit;
+    FloatEdit4: TFloatEdit;
+    FloatEdit5: TFloatEdit;
     procedure ReadConfig;
     procedure WriteConfig;
   public
@@ -178,8 +188,7 @@ implementation
 
 uses
   MainFormUnit, FileCtrl, Registry,
-  SetString //dla SetToString
-  ;
+  SetString; //dla SetToString
 
 {$R *.DFM}
 
@@ -251,6 +260,107 @@ end;
 
 procedure TConfigForm.FormCreate(Sender: TObject);
 begin
+{komponenty dynamiczne}
+  IntEdit1:=TIntEdit.Create(Self);
+  with IntEdit1 do begin
+          Left := 212;
+          Top := 22;
+          Width := 50;
+          Height := 21;
+          TabOrder := 1;
+          Text := '0';
+          OnChange := IntEdit1Change;
+          OnExit := ResolveEditValues1;
+          Parent := GroupBox5;
+          Visible := true;
+  end;
+  IntEdit2:=TIntEdit.Create(Self);
+  with IntEdit2 do begin
+          Left := 12;
+          Top := 90;
+          Width := 48;
+          Height := 21;
+          TabOrder := 2;
+          Text := '0';
+          Parent := GroupBox7;
+          Visible := true;
+  end;
+  IntEdit3:=TIntEdit.Create(Self);
+  with IntEdit3 do begin
+          Left := 70;
+          Top := 90;
+          Width := 48;
+          Height := 21;
+          Hint := 'pozostaw 0 by usun znak';
+          ParentShowHint := False;
+          ShowHint := True;
+          TabOrder := 3;
+          Text := '0';
+          Parent := GroupBox7;
+          Visible := true;
+  end;
+  FloatEdit1:=TFloatEdit.Create(Self);
+  with FloatEdit1 do begin
+          Left := 44;
+          Top := 24;
+          Width := 50;
+          Height := 21;
+          TabOrder := 0;
+          Text := '0';
+          OnChange := ConfigChanged;
+          Parent := GroupBox4;
+          Visible := true;
+  end;
+  FloatEdit2:=TFloatEdit.Create(Self);
+  with FloatEdit2 do begin
+          Left := 136;
+          Top := 24;
+          Width := 50;
+          Height := 21;
+          TabOrder := 1;
+          Text := '0';
+          OnChange := ConfigChanged;
+          Parent := GroupBox4;
+          Visible := true;
+  end;
+  FloatEdit3:=TFloatEdit.Create(Self);
+  with FloatEdit3 do begin
+          Left := 44;
+          Top := 56;
+          Width := 50;
+          Height := 21;
+          TabOrder := 2;
+          Text := '0';
+          OnChange := ConfigChanged;
+          Parent := GroupBox4;
+          Visible := true;
+  end;
+  FloatEdit4:=TFloatEdit.Create(Self);
+  with FloatEdit4 do begin
+          Left := 136;
+          Top := 56;
+          Width := 50;
+          Height := 21;
+          TabOrder := 3;
+          Text := '0';
+          OnChange := ConfigChanged;
+          Parent := GroupBox4;
+          Visible := true;
+  end;
+  FloatEdit5:=TFloatEdit.Create(Self);
+  with FloatEdit5 do begin
+          Left := 92;
+          Top := 22;
+          Width := 50;
+          Height := 21;
+          TabOrder := 0;
+          Text := '0';
+          OnChange := FloatEdit5Change;
+          OnExit := ResolveEditValues1;
+          Parent := GroupBox5;
+          Visible := true;
+  end;
+
   with MainForm.CEVersionInfo1 do
     Caption:=ProductName+' '+FileVersion;
 
@@ -334,13 +444,13 @@ begin
           end;
           try
             TimerInterval:=ReadInteger('TimerInterval');
-            if (TimerInterval<SpinEdit1.MinValue) or (TimerInterval>SpinEdit1.MaxValue) then TimerInterval:=DEFAULT_TIMER_INTERVAL;
+            if (TimerInterval<UpDown1.Min) or (TimerInterval>UpDown1.Max) then TimerInterval:=DEFAULT_TIMER_INTERVAL;
           except
             TimerInterval:=DEFAULT_TIMER_INTERVAL;
           end;
           try
             MinFileAge:=ReadInteger('MinFileAge');
-            if (MinFileAge<SpinEdit2.MinValue) or (MinFileAge>SpinEdit2.MaxValue) then MinFileAge:=DEFAULT_MIN_FILE_AGE;
+            if (MinFileAge<UpDown2.Min) or (MinFileAge>UpDown2.Max) then MinFileAge:=DEFAULT_MIN_FILE_AGE;
           except
             MinFileAge:=DEFAULT_MIN_FILE_AGE;
           end;
@@ -502,8 +612,8 @@ begin
       Edit3.Enabled:=false;
       Edit3.Color:=clBtnFace;
     end;
-    SpinEdit1.Value:=TimerInterval;
-    SpinEdit2.Value:=MinFileAge;
+    Updown1.Position:=TimerInterval;
+    Updown2.Position:=MinFileAge;
     TrackBar1.Position:=Priority;
     Label13.Caption:=PriorityClassNames[Priority];
     CheckBox1.Checked:=AutoStart;
@@ -605,8 +715,8 @@ begin
         WriteString('InputFilesMask',Edit2.Text);
         WriteString('FormatFileExtension',Edit3.Text);
         WriteBool('EnableFormatting',CheckBox2.Checked);
-        WriteInteger('TimerInterval',SpinEdit1.Value);
-        WriteInteger('MinFileAge',SpinEdit2.Value);
+        WriteInteger('TimerInterval',UpDown1.Position);
+        WriteInteger('MinFileAge',UpDown2.Position);
         WriteInteger('Priority',TrackBar1.Position);
         WriteBool('AutoStart',CheckBox1.Checked);
         WriteString('FontName',Memo1.Font.Name);
@@ -653,6 +763,7 @@ procedure TConfigForm.ConfigChanged(Sender: TObject);
 begin
   Button3.Enabled:=true;
 end;
+
 
 procedure TConfigForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -702,8 +813,8 @@ begin
   Edit2.Text:=DEFAULT_INPUT_FILES_MASK;
   Edit3.Text:=DEFAULT_FORMAT_FILE_EXTENSION;
   CheckBox2.Checked:=DEFAULT_ENABLE_FORMATTING;
-  SpinEdit1.Value:=DEFAULT_TIMER_INTERVAL;
-  SpinEdit2.Value:=DEFAULT_MIN_FILE_AGE;
+  UpDown1.Position:=DEFAULT_TIMER_INTERVAL;
+  UpDown2.Position:=DEFAULT_MIN_FILE_AGE;
   TrackBar1.Position:=DEFAULT_PRIORITY;
   CheckBox1.Checked:=DEFAULT_AUTO_START;
   ConfigChanged(Sender);
@@ -738,7 +849,7 @@ begin
   CheckBox5.Checked:=DEFAULT_CLIPPER_COMPATIBLE;
   ComboBox1.ItemIndex:=ord(DEFAULT_CODE_PAGE);
   CheckBox4.Checked:=DEFAULT_USE_CUSTOM_CONVERSION_TABLE;
-  ConfigChanged(Sender);  
+  ConfigChanged(Sender);
 end;
 
 //Zmiana pozycji suwaka Priorytet

@@ -35,11 +35,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Menus, Trayicon, ExtCtrls, ImgList, ConfigFormUnit, CEVersionInfo;
+  Menus, Trayicon, ExtCtrls, ImgList, ConfigFormUnit, CEVersionInfo, NumEdit;
 
 type
   TMainForm = class(TForm)
-    TrayIcon1: TTrayIcon2;
     PopupMenu1: TPopupMenu;
     Konfiguracja1: TMenuItem;
     N1: TMenuItem;
@@ -49,7 +48,6 @@ type
     FontDialog1: TFontDialog;
     Timer2: TTimer;
     SaveDialog1: TSaveDialog;
-    CEVersionInfo1: TCEVersionInfo;
     procedure Zakocz1Click(Sender: TObject);
     procedure TrayIcon1DblClick(Sender: TObject);
     procedure Konfiguracja1Click(Sender: TObject);
@@ -62,6 +60,7 @@ type
     SearchRec : TSearchRec;
     MustExit: boolean;
     TrayIconIndex: integer;
+    TrayIcon1: TTrayIcon2;
     function TestFile: boolean;
     procedure ProcessFile;
     procedure ProcessFormatFile(FileName: string;
@@ -71,6 +70,7 @@ type
     { Public declarations }
     StopTrayIconTimer: boolean;
     ZeroTrayIconIndex: boolean;
+    CEVersionInfo1: TCEVersionInfo;
   end;
 
 var
@@ -90,6 +90,19 @@ procedure TMainForm.FormCreate(Sender: TObject);
 var
   Icon: TIcon;
 begin
+{komponenty dynamiczne}
+  CEVersionInfo1:=TCEVersionInfo.Create(self);
+  TrayIcon1:=TTrayIcon2.Create(self);
+  with TrayIcon1 do begin
+          Active := True;
+          ShowDesigning := False;
+          ShowApp := False;
+          OnDblClick := TrayIcon1DblClick;
+          PopupMenu := PopupMenu1;
+          //Left := 32;
+          //Top := 16;
+  end;
+
   Application.OnException:=AppException;
   Icon:=TIcon.Create;
   try
